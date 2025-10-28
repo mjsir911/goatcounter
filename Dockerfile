@@ -4,6 +4,8 @@
 ### Build GoatCounter
 from docker.io/golang:latest as build
 workdir /goatcounter
+COPY go.mod go.sum ./
+RUN go mod download
 copy --exclude=goatcounter-data --exclude=Dockerfile . /goatcounter
 env CGO_ENABLED=1
 env GOTOOLCHAIN=auto
